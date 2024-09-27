@@ -1,11 +1,14 @@
-#spreadsheet {
+.container {
     display: grid;
-    grid-template-columns: repeat(26, 60px);
-    grid-auto-rows: 30px;
-    gap: 1px;
-}
-#spreadsheet > div {
-    border: 1px solid #ddd;
-    padding: 5px;
-    box-sizing: border-box;
+    grid-template-rows: repeat(auto, 20px);
+
+    .rows {
+        display: grid;
+        grid-template-columns: repeat(27, 1fr);
+    }
+    .columns {
+        text-align: center;
+        border: 1px solid black;
+        
+    }
 }

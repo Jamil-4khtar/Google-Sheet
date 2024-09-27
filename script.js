@@ -1,46 +1,73 @@
-window.onload = function() {
-    const rowHeaders = document.getElementById('row-headers');
-    const columnHeaders = document.getElementById('column-headers');
-    const cells = document.getElementById('cells');
-    
-    // Generate row headers (1-100)
-    for (let i = 1; i <= 100; i++) {
-        const header = document.createElement('div');
-        header.textContent = i;
-        rowHeaders.appendChild(header);
+let container = document.querySelector(".container");
+
+// cells
+for (let row = 0; row <= 100; row++) {
+    let newRow = document.createElement("div");
+    newRow.classList.add("rows")
+
+    for (let col = 0; col <= 26; col++) {
+        
+        if (row == 0) { /* column head */
+            let newCol = document.createElement("div")
+            newCol.classList.add("columns");
+            newCol.innerText = String.fromCharCode(64+col);
+            newCol.style.background = "grey"
+            newRow.append(newCol);
+            if (col == 0) { /* first cell empty */
+                newCol.innerText = "";
+            }
+        }
+        else { /* everything thats not column head */
+            
+            if (col == 0) {/* row head */
+                let newCol = document.createElement("div")
+                newCol.classList.add("columns");
+                newCol.innerText = row;
+                newCol.style.background = "grey"
+                newRow.append(newCol);
+            }
+            //every editable cell
+            let newCol = document.createElement("div")
+            newCol.classList.add("columns");
+            newCol.innerText = row + String.fromCharCode(65+col);
+            newRow.append(newCol);
+            if (col == 26) { /* grid overflow contained */
+                newCol.remove()
+            }
+        }
     }
-    
-    // Generate column headers (A-Z)
-    for (let i = 0; i < 26; i++) {
-        const header = document.createElement('div');
-        header.textContent = String.fromCharCode(65 + i); // 65 is the ASCII value for 'A'
-        columnHeaders.appendChild(header);
-    }
-    
-    // Generate cells
-    for (let i = 0; i < 26*100; i++) {
-        const cell = document.createElement('div');
-        cell.contentEditable = true;
-        cells.appendChild(cell);
-    }
-    
-    // Load and save data...
-    const spreadsheet = document.getElementById('spreadsheet');
-    
-    // Load data from local storage
-    const savedData = localStorage.getItem('spreadsheet-data');
-    if (savedData) {
-        spreadsheet.innerHTML = savedData;
-    }
-    
-    for (let i = 0; i < 26*100; i++) { // creates 2600 cells (100 rows, 26 columns)
-        const cell = document.createElement('div');
-        cell.contentEditable = true;
-        spreadsheet.appendChild(cell);
-    }
-    
-    // Save data to local storage whenever a cell is edited
-    spreadsheet.addEventListener('input', function() {
-        localStorage.setItem('spreadsheet-data', spreadsheet.innerHTML);
-    });
+    container.append(newRow)
 }
+
+function addRows(currentRows, increment) {
+    let container = document.querySelector(".container");
+
+    // Calculate the new number of rows
+    let newRows = currentRows + increment;
+
+    // Loop from currentRows to newRows
+    for (let row = currentRows + 1; row <= newRows; row++) {
+        let newRow = document.createElement("div");
+        newRow.classList.add("rows");
+
+        for (let col = 0; col <= 26; col++) {
+            let newCol = document.createElement("div")
+            newCol.classList.add("columns");
+
+            if (col == 0) {
+                newCol.innerText = row;
+                newCol.style.background = "grey"
+                newRow.append(newCol);
+            } else {
+                newCol.innerText = row + String.fromCharCode(64+col);
+                newRow.append(newCol);
+                // if (col == 26) {
+                //     newCol.remove()
+                // }
+            }
+        }
+        container.append(newRow)
+    }
+    return newRows; // return the updated row count
+}
+addRows(100, 50)
