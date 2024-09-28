@@ -14,6 +14,8 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.491);
         text-align: center;
         outline: none;
+        /* outline-color: #0b57d0;
+        background: #0b57d057; */
         overflow: scroll;
         scrollbar-width: none;
     }
@@ -27,7 +29,13 @@
 }
 .editcell {
     background: white;
+    text-align: start !important;
+    padding: 3px;
 }
+.selected {
+    background-color:#0b57d069;
+}
+
 .addDiv {
     padding: 10px;
     font-size: small;

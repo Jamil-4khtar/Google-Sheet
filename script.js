@@ -98,7 +98,7 @@ function addRows(currentRows, increment) {
     }
     return newRows; // return the updated row count
 }
-// addRows(100, 50)
+
 // let scrollCounter = 0;
 /* window.addEventListener('scroll', function () {
 if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -115,3 +115,35 @@ if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         }
     }
 }); */
+
+
+/////////multiple selection/////
+let selectedCells = new Set();
+let cells = document.querySelectorAll(".editcell")
+cells.forEach(eachCell => {
+    eachCell.addEventListener("click", (e) => {
+        if (e.ctrlKey == false && e.metaKey == false) {
+            for(let t of selectedCells) {
+                t.classList.remove("selected")
+            }
+            selectedCells.clear();
+        }
+        if (selectedCells.has(e.target)) {
+            e.target.classList.remove("selected")
+            selectedCells.delete(e.target)
+        } else {
+            selectedCells.add(e.target)
+            e.target.classList.add("selected")
+        }
+    })
+})
+
+///////bold button////////
+let boldBtn = document.querySelector(".bold");
+boldBtn.addEventListener("click", (e) => {
+    selectedCells.forEach(c => {
+        c.style.fontWeight = c.style.fontWeight == "bold"?"normal":"bold";
+    })
+})
+
+
