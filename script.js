@@ -43,9 +43,6 @@ for (let row = 0; row <= 100; row++) {
     }
     container.append(newRow)
 }
-
-
-
 //  Add 100 more rows ////////////////////////////
 let currentRows = 100
 let increment = 100
@@ -59,7 +56,7 @@ addBtn.querySelector("button").addEventListener("click", (e) => {
     currentRows += 100
     console.log("🚀 ~ window.addEventListener ~ currentRows:", currentRows)
 })
-
+///////////////////////////////////////////////////////
 
 function addRows(currentRows, increment) {
     let container = document.querySelector(".container");
@@ -98,25 +95,6 @@ function addRows(currentRows, increment) {
     }
     return newRows; // return the updated row count
 }
-
-// let scrollCounter = 0;
-/* window.addEventListener('scroll', function () {
-if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        // console.log(Window.innerHeight +window.scrollY);
-        // User has scrolled to the bottom of the page
-        scrollCounter++;
-
-        if (scrollCounter == 2) {
-            // User has scrolled to the bottom twice, load more rows
-            addRows(currentRows, increment)
-            currentRows += 100
-            console.log("🚀 ~ window.addEventListener ~ currentRows:", currentRows)                    // Reset scroll counter
-            scrollCounter = 0;
-        }
-    }
-}); */
-
-
 /////////multiple selection/////
 let selectedCells = new Set();
 let cells = document.querySelectorAll(".editcell")
@@ -145,5 +123,7 @@ boldBtn.addEventListener("click", (e) => {
         c.style.fontWeight = c.style.fontWeight == "bold"?"normal":"bold";
     })
 })
+
+
 
 
